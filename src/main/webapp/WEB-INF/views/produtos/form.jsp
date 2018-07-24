@@ -16,24 +16,29 @@
 	<form:form action="${s:mvcUrl('PC#gravar').build()}" method="POST" modelAttribute="produto">
 		<div>
 			<label>Título</label>
-			<input type="text" name="titulo">
+			<form:input path="titulo"/>
 			<form:errors path="titulo"></form:errors>
 		</div>
 		<div>
 			<label>Descrição</label>
-			<textarea rows="10" cols="20" name="descricao"></textarea>
+			<form:textarea rows="10" cols="20" path="descricao"></form:textarea>
 			<form:errors path="descricao"></form:errors>
 		</div>
 		<div>
 			<label>Páginas</label>
-			<input type="text" name="paginas">
+			<form:input path="paginas"/>
 			<form:errors path="paginas"></form:errors>
+		</div>
+		<div>
+			<label>Data de Lançamento</label>
+			<form:input path="dataLancamento"/>
+			<form:errors path="dataLancamento"></form:errors>
 		</div>
 		<c:forEach items="${tiposPreco}" var="tipoPreco"  varStatus="status">
 			<div>
 				<label>Preço do ${tipoPreco.getDescricao()}</label> 
-				<input type="hidden" name="precos[${status.index}].tipo" value="${tipoPreco}">
-				<input type="text" name="precos[${status.index}].valor">
+				<form:input path="precos[${status.index}].valor"/>
+				<form:hidden path="precos[${status.index}].tipo" value="${tipoPreco}"/>
 			</div>
 		</c:forEach>
 		<button type="submit">Cadastrar Livro</button>

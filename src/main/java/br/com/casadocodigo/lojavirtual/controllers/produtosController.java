@@ -32,7 +32,7 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping("/form")
-	public ModelAndView form() {
+	public ModelAndView form(Produto produto) {
 		ModelAndView modelAndView = new ModelAndView("produtos/form");
 		modelAndView.addObject("tiposPreco", TipoPreco.values());
 		
@@ -49,7 +49,7 @@ public class ProdutosController {
 		
 		// validando os dados
 		if(result.hasErrors()) {
-			return form();
+			return form(produto);
 		}
 		// grava no banco através do DAO
 		produtoDAO.gravar(produto);
