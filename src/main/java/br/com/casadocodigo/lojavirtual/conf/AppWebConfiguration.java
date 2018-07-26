@@ -18,9 +18,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import br.com.casadocodigo.lojavirtual.controllers.HomeController;
 import br.com.casadocodigo.lojavirtual.daos.ProdutoDAO;
 import br.com.casadocodigo.lojavirtual.infra.FileSaver;
+import br.com.casadocodigo.lojavirtual.models.CarrinhoCompras;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class, ProdutoDAO.class, FileSaver.class })
+@ComponentScan(basePackageClasses = { HomeController.class, ProdutoDAO.class, FileSaver.class, CarrinhoCompras.class }) // pacotes que serão scanneados pelo ILA
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	// O Spring MVC nega o acesso à pasta resources, para liberar o acesso: 
@@ -31,14 +32,21 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	    configurer.enable();
 	}
 	
+	// InternalResourceViewResolver se refere a um resolvedor interno do caminho padrão das views
+	// Configura o Spring questoes internas sobre as views
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
+		
+		// expor os beans para acesso na view
+		resolver.setExposedContextBeanNames("carrinhoCompras");
+		
 		return resolver;
 	}
 	
+	// Configura o Spring para utilização de um arquivo de mensagens para exibição nas views
 	@Bean
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
@@ -49,6 +57,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		return messageSource;
 	}
 	
+	// Configura o Spring para utilização de um padrão na conversão e formatação de Datas
 	@Bean
 	public FormattingConversionService mvcConversionService() {
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();

@@ -21,12 +21,12 @@ public class Produto {
 	private String titulo;
 	private String Descricao;
 	private int paginas;
-	
+
 	@DateTimeFormat
 	private Calendar dataLancamento;
-	
+
 	private String sumarioPath;
-	
+
 	@ElementCollection
 	private List<Preco> precos;
 
@@ -90,4 +90,31 @@ public class Produto {
 	public void setSumarioPath(String sumarioPath) {
 		this.sumarioPath = sumarioPath;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Produto)) {
+			return false;
+		}
+		Produto other = (Produto) obj;
+		if (id != other.id) {
+			return false;
+		}
+		return true;
+	}
+
 }
