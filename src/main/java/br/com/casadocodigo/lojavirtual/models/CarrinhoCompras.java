@@ -7,13 +7,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 // quando faz-se necessário que um recurso seja individual, ou seja, unico por usuário
 // definimos o recurso como escopo de sessão
+// utilizamos o ScopedProxyMode para não ter que mudar o escopo de todos os controllers que usam esta classe
 @Component
-@Scope(value = WebApplicationContext.SCOPE_SESSION)
+@Scope(value = WebApplicationContext.SCOPE_SESSION, 
+       proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CarrinhoCompras implements Serializable {
 
 	// por definir o recurso como escopo de sessão:
@@ -52,6 +55,12 @@ public class CarrinhoCompras implements Serializable {
 
 	public Collection<CarrinhoItem> getItens() {
 		return itens.keySet();
+	}
+
+	public void remover(Integer produtoId, TipoPreco tipoPreco) {
+		Produto produto = new Produto();
+		produto.setId(produtoId);
+		itens.remove(new CarrinhoItem(produto, tipoPreco));
 	}
 
 }
