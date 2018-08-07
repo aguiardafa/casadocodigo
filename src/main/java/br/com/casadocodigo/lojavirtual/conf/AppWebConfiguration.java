@@ -1,5 +1,8 @@
 package br.com.casadocodigo.lojavirtual.conf;
 
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,12 +25,8 @@ import br.com.casadocodigo.lojavirtual.infra.FileSaver;
 import br.com.casadocodigo.lojavirtual.models.CarrinhoCompras;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class, ProdutoDAO.class, FileSaver.class, CarrinhoCompras.class }) // pacotes
-																														// que
-																														// serão
-																														// scanneados
-																														// pelo
-																														// ILA
+@ComponentScan(basePackageClasses = { HomeController.class, ProdutoDAO.class, FileSaver.class, CarrinhoCompras.class })
+@EnableCaching
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	// O Spring MVC nega o acesso à pasta resources, para liberar o acesso:
@@ -49,8 +48,8 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setSuffix(".jsp");
 
 		// expor todos beans para acesso na view
-		//resolver.setExposeContextBeansAsAttributes(true);
-		
+		// resolver.setExposeContextBeansAsAttributes(true);
+
 		// expor um bean específico para acesso na view
 		resolver.setExposedContextBeanNames("carrinhoCompras");
 
@@ -93,5 +92,12 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
+	}
+
+	// CacheManager fornece um gerenciador de cache para que o Spring
+	// Configura o Spring para utilização de cache das views
+	@Bean
+	public CacheManager cacheManager() {
+		return new ConcurrentMapCacheManager();
 	}
 }
