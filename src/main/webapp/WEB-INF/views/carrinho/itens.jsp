@@ -127,17 +127,17 @@
 				      </tr>
 			      </c:forEach>
 		      </tbody>
-			      <tfoot>
-			        <tr>
-			          <td colspan="3">
-			          	<form action="${s:mvcUrl('PC#finalizarCompra').build()}" method="post">
-			          		<input type="submit" class="checkout" name="checkout" value="Finalizar compra" />
-			          	</form>
-		          	  </td>
-			          <td class="numeric-cell">${carrinhoCompras.total }</td>
-			          <td></td>
-			        </tr>
-			      </tfoot>
+		      <tfoot>
+		        <tr>
+		          <td colspan="3">
+		          	<form action="${s:mvcUrl('PC#finalizarCompra').build()}" method="post">
+		          		<input type="submit" class="checkout" name="checkout" value="Finalizar compra" />
+		          	</form>
+	          	  </td>
+		          <td class="numeric-cell">${carrinhoCompras.total }</td>
+		          <td></td>
+		        </tr>
+		      </tfoot>
 		    </table>
 		  
 		  <h2>Você já conhece os outros livros da Casa do Código?</h2>

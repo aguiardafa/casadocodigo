@@ -15,14 +15,14 @@ import org.springframework.web.context.WebApplicationContext;
 // definimos o recurso como escopo de sessão
 // utilizamos o ScopedProxyMode para não ter que mudar o escopo de todos os controllers que usam esta classe
 @Component
-@Scope(value = WebApplicationContext.SCOPE_SESSION, 
-       proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CarrinhoCompras implements Serializable {
 
 	// por definir o recurso como escopo de sessão:
 	// faz-se necessário serializar o objeto
 	private static final long serialVersionUID = 1L;
 
+	// mapa de item e quantidade
 	private Map<CarrinhoItem, Integer> itens = new LinkedHashMap<CarrinhoItem, Integer>();
 
 	public void add(CarrinhoItem item) {

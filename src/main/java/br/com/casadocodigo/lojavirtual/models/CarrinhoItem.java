@@ -1,9 +1,12 @@
 package br.com.casadocodigo.lojavirtual.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class CarrinhoItem {
+public class CarrinhoItem implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private TipoPreco tipoPreco;
 	private Produto produto;
 

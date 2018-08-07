@@ -15,6 +15,7 @@
 <body>
 	<h1>Lista de Produtos da Casa do Código:</h1>
 	<h3 style="color: blue"> ${sucesso} </h3>
+	<h3 style="color: red"> ${falha} </h3>
 	<table style="width: 100%">
 		<tr>
 			<td>#</td>

@@ -18,6 +18,7 @@ import br.com.casadocodigo.lojavirtual.models.TipoPreco;
 @RequestMapping("/carrinho")
 @Scope(value=WebApplicationContext.SCOPE_REQUEST)
 public class CarrinhoComprasController {
+	
 	@Autowired
 	private ProdutoDAO produtoDAO;
 	@Autowired
